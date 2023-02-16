@@ -8,6 +8,7 @@ import PlanForm from "@/components/PlanForm";
 import AddonsForm from "@/components/AddonsForm";
 import FinalStep from "@/components/FinalStep";
 import SuccessMessage from "@/components/SuccessMessage";
+import next from "next";
 
 interface AddOn {
   id: number;
@@ -59,6 +60,7 @@ const initialValues: FormItems = {
 
 export default function Home() {
   const [formData, setFormData] = useState(initialValues);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const {
     previousStep,
     nextStep,
@@ -70,12 +72,59 @@ export default function Home() {
   } = useMultiplestepForm(4);
 
   function updateForm(fieldToUpdate: Partial<FormItems>) {
+    const { name, email, phone } = fieldToUpdate;
+
+    if (name && name.trim().length < 3) {
+      setErrors((prevState) => ({
+        ...prevState,
+        name: "Name should be at least 3 characters long",
+      }));
+    } else if (name && name.trim().length > 15) {
+      setErrors((prevState) => ({
+        ...prevState,
+        name: "Name should be no longer than 15 characters",
+      }));
+    } else {
+      setErrors((prevState) => ({
+        ...prevState,
+        name: "",
+      }));
+    }
+
+    if (email && !/\S+@\S+\.\S+/.test(email)) {
+      setErrors((prevState) => ({
+        ...prevState,
+        email: "Please enter a valid email address",
+      }));
+    } else {
+      setErrors((prevState) => ({
+        ...prevState,
+        email: "",
+      }));
+    }
+
+    if (phone && !/^[0-9]{10}$/.test(phone)) {
+      setErrors((prevState) => ({
+        ...prevState,
+        phone: "Please enter a valid 10-digit phone number",
+      }));
+    } else {
+      setErrors((prevState) => ({
+        ...prevState,
+        phone: "",
+      }));
+    }
+
     setFormData({ ...formData, ...fieldToUpdate });
   }
   console.log(formData);
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (Object.values(errors).some((error) => error)) {
+      return;
+    }
+    nextStep();
   };
 
   return (
@@ -88,7 +137,11 @@ export default function Home() {
       ) : (
         <form onSubmit={handleOnSubmit}>
           {currentStepIndex === 0 && (
-            <UserInfoForm {...formData} updateForm={updateForm} />
+            <UserInfoForm
+              {...formData}
+              updateForm={updateForm}
+              errors={errors}
+            />
           )}
           {currentStepIndex === 1 && (
             <PlanForm {...formData} updateForm={updateForm} />
@@ -104,7 +157,7 @@ export default function Home() {
               Go Back
             </Button>
           )}
-          <Button onClick={nextStep} type="submit" className="">
+          <Button type="submit" className="">
             {isLastStep ? "Confirm" : "Next Step"}
           </Button>
         </form>
