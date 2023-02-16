@@ -1,91 +1,114 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useMultiplestepForm } from "hooks/useMultiplestepForm";
+import UserInfoForm from "@/components/UserInfoForm";
+import PlanForm from "@/components/PlanForm";
+import AddonsForm from "@/components/AddonsForm";
+import FinalStep from "@/components/FinalStep";
+import SuccessMessage from "@/components/SuccessMessage";
+
+interface AddOn {
+  id: number;
+  checked: boolean;
+  title: string;
+  subtitle: string;
+  price: number;
+}
+
+export type FormItems = {
+  name: string;
+  email: string;
+  phone: string;
+  plan: "arcade" | "advanced" | "pro";
+  yearly: boolean;
+  addOns: AddOn[];
+};
+
+const initialValues: FormItems = {
+  name: "",
+  email: "",
+  phone: "",
+  plan: "arcade",
+  yearly: false,
+  addOns: [
+    {
+      id: 1,
+      checked: true,
+      title: "Online Service",
+      subtitle: "Access to multiple games",
+      price: 1,
+    },
+    {
+      id: 2,
+      checked: false,
+      title: "Large storage",
+      subtitle: "Extra 1TB of cloud save",
+      price: 2,
+    },
+    {
+      id: 3,
+      checked: false,
+      title: "Customizable Profile",
+      subtitle: "Custom theme on your profile",
+      price: 2,
+    },
+  ],
+};
 
 export default function Home() {
+  const [formData, setFormData] = useState(initialValues);
+  const {
+    previousStep,
+    nextStep,
+    currentStepIndex,
+    isFirstStep,
+    isLastStep,
+    steps,
+    showSuccessMsg,
+  } = useMultiplestepForm(4);
+
+  function updateForm(fieldToUpdate: Partial<FormItems>) {
+    setFormData({ ...formData, ...fieldToUpdate });
+  }
+  console.log(formData);
+
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+    <main className="bg-slate-300 text-xl">
+      <p>
+        {currentStepIndex + 1} / {steps}
+      </p>
+      {showSuccessMsg ? (
+        <SuccessMessage />
+      ) : (
+        <form onSubmit={handleOnSubmit}>
+          {currentStepIndex === 0 && (
+            <UserInfoForm {...formData} updateForm={updateForm} />
+          )}
+          {currentStepIndex === 1 && (
+            <PlanForm {...formData} updateForm={updateForm} />
+          )}
+          {currentStepIndex === 2 && (
+            <AddonsForm {...formData} updateForm={updateForm} />
+          )}
+          {currentStepIndex === 3 && (
+            <FinalStep {...formData} updateForm={updateForm} />
+          )}
+          {!isFirstStep && (
+            <Button onClick={previousStep} type="button">
+              Go Back
+            </Button>
+          )}
+          <Button onClick={nextStep} type="submit" className="">
+            {isLastStep ? "Confirm" : "Next Step"}
+          </Button>
+        </form>
+      )}
     </main>
-  )
+  );
 }
