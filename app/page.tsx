@@ -9,6 +9,7 @@ import AddonsForm from "@/components/AddonsForm";
 import FinalStep from "@/components/FinalStep";
 import SuccessMessage from "@/components/SuccessMessage";
 import next from "next";
+import SideBar from "@/components/SideBar";
 
 interface AddOn {
   id: number;
@@ -68,6 +69,7 @@ export default function Home() {
     isFirstStep,
     isLastStep,
     steps,
+    goTo,
     showSuccessMsg,
   } = useMultiplestepForm(4);
 
@@ -128,40 +130,43 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-slate-300 text-xl">
-      <p>
-        {currentStepIndex + 1} / {steps}
-      </p>
-      {showSuccessMsg ? (
-        <SuccessMessage />
-      ) : (
-        <form onSubmit={handleOnSubmit}>
-          {currentStepIndex === 0 && (
-            <UserInfoForm
-              {...formData}
-              updateForm={updateForm}
-              errors={errors}
-            />
-          )}
-          {currentStepIndex === 1 && (
-            <PlanForm {...formData} updateForm={updateForm} />
-          )}
-          {currentStepIndex === 2 && (
-            <AddonsForm {...formData} updateForm={updateForm} />
-          )}
-          {currentStepIndex === 3 && (
-            <FinalStep {...formData} updateForm={updateForm} />
-          )}
-          {!isFirstStep && (
-            <Button onClick={previousStep} type="button">
-              Go Back
+    <div className="">
+      <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
+      <main className="bg-slate-300 text-xl">
+        <p>
+          {currentStepIndex + 1} / {steps}
+        </p>
+        {showSuccessMsg ? (
+          <SuccessMessage />
+        ) : (
+          <form onSubmit={handleOnSubmit}>
+            {currentStepIndex === 0 && (
+              <UserInfoForm
+                {...formData}
+                updateForm={updateForm}
+                errors={errors}
+              />
+            )}
+            {currentStepIndex === 1 && (
+              <PlanForm {...formData} updateForm={updateForm} />
+            )}
+            {currentStepIndex === 2 && (
+              <AddonsForm {...formData} updateForm={updateForm} />
+            )}
+            {currentStepIndex === 3 && (
+              <FinalStep {...formData} updateForm={updateForm} />
+            )}
+            {!isFirstStep && (
+              <Button onClick={previousStep} type="button">
+                Go Back
+              </Button>
+            )}
+            <Button type="submit" className="">
+              {isLastStep ? "Confirm" : "Next Step"}
             </Button>
-          )}
-          <Button type="submit" className="">
-            {isLastStep ? "Confirm" : "Next Step"}
-          </Button>
-        </form>
-      )}
-    </main>
+          </form>
+        )}
+      </main>
+    </div>
   );
 }
