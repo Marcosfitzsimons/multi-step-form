@@ -1,9 +1,10 @@
-import { Inter } from "@next/font/google";
+import { Ubuntu } from "@next/font/google";
 
 import "../styles/globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const ubuntu = Ubuntu({
+  variable: "--font-ubuntu",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={ubuntu.variable}>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
