@@ -20,11 +20,10 @@ const UserInfoForm = ({
       title="Personal info"
       description="Please provide your name, email address, and phone number."
     >
-      <div className="">
-        <div className="">
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="name">Name</Label>
           <Input
-            className=""
             autoFocus
             type="text"
             name="name"
@@ -32,11 +31,12 @@ const UserInfoForm = ({
             placeholder="e.g. Stephen King"
             value={name}
             onChange={(e) => updateForm({ name: e.target.value })}
+            className="w-full"
             required
           />
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
-        <div className="">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="email">Email Address</Label>
           <Input
             type="text"
@@ -44,12 +44,15 @@ const UserInfoForm = ({
             id="email"
             placeholder="e.g. stephenking@lorem.com"
             value={email}
+            className="w-full"
             onChange={(e) => updateForm({ email: e.target.value })}
             required
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
         </div>
-        <div className="">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="phone">Phone Number</Label>
           <Input
             type="tel"
@@ -57,10 +60,13 @@ const UserInfoForm = ({
             id="phone"
             placeholder="e.g. +1 234 567 890"
             value={phone}
+            className="w-full"
             onChange={(e) => updateForm({ phone: e.target.value })}
             required
           />
-          {errors.phone && <p>{errors.phone}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone}</p>
+          )}
         </div>
       </div>
     </FormWrapper>

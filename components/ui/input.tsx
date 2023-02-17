@@ -10,7 +10,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-1 items-center">
         <div
-          className="relative before:pointer-events-none focus-within:before:opacity-100 before:opacity-0 before:absolute before:-inset-1 before:rounded-[12px] before:border before:border-[#77f6aa]/70 before:ring-2 before:ring-[#77f6aa]/5 before:transition
+          className="w-full relative before:pointer-events-none focus-within:before:opacity-100 before:opacity-0 before:absolute before:-inset-1 before:rounded-[12px] before:border before:border-[#77f6aa]/70 before:ring-2 before:ring-[#77f6aa]/5 before:transition
 after:pointer-events-none after:absolute after:inset-px after:rounded-[7px] after:shadow-highlight after:shadow-white/5 focus-within:after:shadow-[#77f6aa] after:transition"
         >
           <input

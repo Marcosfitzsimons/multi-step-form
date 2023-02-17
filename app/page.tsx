@@ -136,11 +136,14 @@ export default function Home() {
       ) : (
         ""
       )}
-      <main className="w-[65%] mt-5">
+      <main className={`${showSuccessMsg ? "w-full" : "w-[65%] mt-5"}`}>
         {showSuccessMsg ? (
           <SuccessMessage />
         ) : (
-          <form onSubmit={handleOnSubmit} className="w-full">
+          <form
+            onSubmit={handleOnSubmit}
+            className="w-full flex flex-col justify-between h-full"
+          >
             {currentStepIndex === 0 && (
               <UserInfoForm
                 {...formData}
@@ -154,21 +157,23 @@ export default function Home() {
             {currentStepIndex === 2 && (
               <AddonsForm {...formData} updateForm={updateForm} />
             )}
-            {currentStepIndex === 3 && (
-              <FinalStep {...formData} updateForm={updateForm} />
-            )}
-            <div className="flex w-full justify-between">
-              {!isFirstStep && (
+            {currentStepIndex === 3 && <FinalStep {...formData} goTo={goTo} />}
+            <div className="w-full items-center flex justify-between">
+              <div className="">
                 <Button
                   onClick={previousStep}
                   type="button"
                   variant="ghost"
-                  className="text-neutral-200 hover:text-white"
+                  className={`${
+                    isFirstStep
+                      ? "invisible"
+                      : "visible p-0 text-neutral-200 hover:text-white"
+                  }`}
                 >
                   Go Back
                 </Button>
-              )}
-              <div className="flex flex-1 items-center">
+              </div>
+              <div className="flex items-center">
                 <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
                   <Button
                     type="submit"

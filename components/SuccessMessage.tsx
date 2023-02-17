@@ -1,17 +1,26 @@
+import Image from "next/image";
+import successIcon from "../public/assets/success.png";
 import { RefreshCcw } from "lucide-react";
 import { Button } from "../components/ui/button";
 
 const SuccessMessage = () => {
   const refresh = () => window.location.reload();
   return (
-    <section>
-      <h4>Thank you!</h4>
-      <p>
+    <section className="w-full h-full flex flex-col items-center justify-center gap-2 text-center">
+      <Image
+        src={successIcon}
+        width="150"
+        height="150"
+        alt="Success Icon"
+        className="mb-4"
+      />
+      <h4 className="text-3xl font-semibold text-white">Thank you!</h4>
+      <p className="max-w-md text-neutral-300">
         Thanks for confirming your subscription! We hope you have fun using our
         plataform. If you ever need support, please feel free to email us at
         support@loremgaming.com
       </p>
-      <div className="flex flex-1 items-center">
+      <div className="flex items-center mt-6">
         <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
           <Button
             onClick={refresh}
