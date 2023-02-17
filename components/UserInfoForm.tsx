@@ -24,6 +24,7 @@ const UserInfoForm = ({
         <div className="">
           <Label htmlFor="name">Name</Label>
           <Input
+            className=""
             autoFocus
             type="text"
             name="name"

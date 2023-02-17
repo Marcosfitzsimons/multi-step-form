@@ -130,16 +130,17 @@ export default function Home() {
   };
 
   return (
-    <div className="">
-      <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
-      <main className="bg-slate-300 text-xl">
-        <p>
-          {currentStepIndex + 1} / {steps}
-        </p>
+    <div className="flex justify-between h-[500px] w-11/12 max-w-3xl relative m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4">
+      {!showSuccessMsg ? (
+        <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
+      ) : (
+        ""
+      )}
+      <main className="w-[65%] mt-5">
         {showSuccessMsg ? (
           <SuccessMessage />
         ) : (
-          <form onSubmit={handleOnSubmit}>
+          <form onSubmit={handleOnSubmit} className="w-full">
             {currentStepIndex === 0 && (
               <UserInfoForm
                 {...formData}
@@ -156,14 +157,28 @@ export default function Home() {
             {currentStepIndex === 3 && (
               <FinalStep {...formData} updateForm={updateForm} />
             )}
-            {!isFirstStep && (
-              <Button onClick={previousStep} type="button">
-                Go Back
-              </Button>
-            )}
-            <Button type="submit" className="">
-              {isLastStep ? "Confirm" : "Next Step"}
-            </Button>
+            <div className="flex w-full justify-between">
+              {!isFirstStep && (
+                <Button
+                  onClick={previousStep}
+                  type="button"
+                  variant="ghost"
+                  className="text-neutral-200 hover:text-white"
+                >
+                  Go Back
+                </Button>
+              )}
+              <div className="flex flex-1 items-center">
+                <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
+                  <Button
+                    type="submit"
+                    className="relative text-neutral-200 bg-neutral-900 border border-black/20 shadow-input shadow-black/10 rounded-xl hover:text-white"
+                  >
+                    {isLastStep ? "Confirm" : "Next Step"}
+                  </Button>
+                </div>
+              </div>
+            </div>
           </form>
         )}
       </main>
