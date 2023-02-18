@@ -6,16 +6,18 @@ import { Button } from "../components/ui/button";
 const SuccessMessage = () => {
   const refresh = () => window.location.reload();
   return (
-    <section className="w-full h-full flex flex-col items-center justify-center gap-2 text-center">
+    <section className="w-full h-full flex flex-col items-center justify-center gap-4 md:gap-2 text-center">
       <Image
         src={successIcon}
         width="150"
         height="150"
         alt="Success Icon"
-        className="mb-4"
+        className="md:mb-4"
       />
-      <h4 className="text-3xl font-semibold text-white">Thank you!</h4>
-      <p className="max-w-md text-neutral-300">
+      <h4 className="text-2xl font-semibold text-white md:text-3xl">
+        Thank you!
+      </h4>
+      <p className="text-sm max-w-md text-neutral-300 md:text-base">
         Thanks for confirming your subscription! We hope you have fun using our
         plataform. If you ever need support, please feel free to email us at
         support@loremgaming.com

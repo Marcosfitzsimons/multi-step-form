@@ -43,7 +43,7 @@ const FinalStep = ({ yearly, plan, addOns, goTo }: StepProps) => {
         <div className="bg-neutral-900 p-4 mt-2 rounded-md border border-neutral-700">
           <div className="flex justify-between items-center">
             <div className="">
-              <h4 className="text-lg font-semibold text-white">
+              <h4 className="font-semibold text-white md:text-lg">
                 {`${plan.charAt(0).toUpperCase() + plan.slice(1)} (${
                   yearly ? "Yearly" : "Monthly"
                 })`}
@@ -76,7 +76,7 @@ const FinalStep = ({ yearly, plan, addOns, goTo }: StepProps) => {
           <p className="text-neutral-400">
             Total (per {yearly ? "year" : "month"})
           </p>
-          <p className="text-[#6fe79f] font-semibold text-lg">
+          <p className="text-[#6fe79f] font-semibold md:text-lg">
             +$
             {yearly
               ? planPrice * 10 + totalAddOnsPrice * 10

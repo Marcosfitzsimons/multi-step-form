@@ -20,7 +20,7 @@ const UserInfoForm = ({
       title="Personal info"
       description="Please provide your name, email address, and phone number."
     >
-      <div className="flex flex-col gap-5">
+      <div className="w-full flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Name</Label>
           <Input

@@ -7,17 +7,19 @@ type NavProps = {
 
 const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
   return (
-    <div className="text-slate-200 w-[25%]">
-      <nav className="bg-neutral-900 p-5 h-full rounded-md border border-neutral-700">
-        <ul className="flex flex-col gap-2">
+    <div className="absolute -top-20 left-0 w-full md:w-[25%] md:relative md:top-0 md:left-0">
+      <nav className="py-5 text-slate-200 bg-neutral-900 h-full rounded-md border border-neutral-700 md:p-5">
+        <ul className="flex justify-center gap-2 md:flex-col">
           <li className="flex flex-col items-start font-medium">
-            <span className="text-neutral-500 uppercase text-sm">step 1</span>
+            <span className="hidden text-neutral-500 uppercase text-sm md:flex">
+              step 1
+            </span>
             <button
               tabIndex={0}
               onClick={() => goTo(0)}
-              className={
+              className={`text-sm ${
                 currentStepIndex === 0 ? "text-[#ffe666]" : "text-white"
-              }
+              } md:text-base`}
             >
               <RoughNotation
                 type="underline"
@@ -29,13 +31,15 @@ const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
             </button>
           </li>
           <li className="flex flex-col items-start font-medium">
-            <span className="text-neutral-500 uppercase text-sm">step 2</span>
+            <span className="hidden text-neutral-500 uppercase text-sm md:flex">
+              step 2
+            </span>
             <button
               tabIndex={0}
               onClick={() => goTo(1)}
-              className={
+              className={`text-sm ${
                 currentStepIndex === 1 ? "text-[#bd284d]" : "text-white"
-              }
+              } md:text-base`}
             >
               <RoughNotation
                 type="underline"
@@ -47,13 +51,15 @@ const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
             </button>
           </li>
           <li className="flex flex-col items-start font-medium">
-            <span className="text-neutral-500 uppercase text-sm">step 3</span>
+            <span className="hidden text-neutral-500 uppercase text-sm md:flex">
+              step 3
+            </span>
             <button
               tabIndex={0}
               onClick={() => goTo(2)}
-              className={
+              className={`text-sm ${
                 currentStepIndex === 2 ? "text-[#E7B8FF]" : "text-white"
-              }
+              } md:text-base`}
             >
               <RoughNotation
                 type="underline"
@@ -65,13 +71,15 @@ const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
             </button>
           </li>
           <li className="flex flex-col items-start font-medium">
-            <span className="text-neutral-500 uppercase text-sm">step 4</span>
+            <span className="hidden text-neutral-500 uppercase text-sm md:flex">
+              step 4
+            </span>
             <button
               tabIndex={0}
               onClick={() => goTo(3)}
-              className={
+              className={`text-sm ${
                 currentStepIndex === 3 ? "text-[#6fe79f]" : "text-white"
-              }
+              } md:text-base`}
             >
               <RoughNotation
                 type="underline"

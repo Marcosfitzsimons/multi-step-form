@@ -130,13 +130,19 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-between h-[500px] w-11/12 max-w-3xl relative m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4">
+    <div
+      className={`flex justify-between ${
+        currentStepIndex === 1 ? "h-[600px] md:h-[500px]" : "h-[500px]"
+      } w-11/12 max-w-4xl relative m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4`}
+    >
       {!showSuccessMsg ? (
         <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
       ) : (
         ""
       )}
-      <main className={`${showSuccessMsg ? "w-full" : "w-[65%] mt-5"}`}>
+      <main
+        className={`${showSuccessMsg ? "w-full" : "w-full md:mt-5 md:w-[65%]"}`}
+      >
         {showSuccessMsg ? (
           <SuccessMessage />
         ) : (
