@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
+  "extends": ["next/core-web-vitals", ""],
   "plugins": ["tailwindcss"],
   "settings": {
     "tailwindcss": {
