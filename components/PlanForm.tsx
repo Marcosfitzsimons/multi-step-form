@@ -47,10 +47,10 @@ const PlanForm = ({ updateForm, plan, yearly }: stepProps) => {
       >
         <ToggleGroup.Item
           value="arcade"
-          className="border border-neutral-600 flex items-start gap-2 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
+          className="border border-neutral-600 flex items-start gap-3 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
         >
           <Image src={arcadeImg} alt="arcade" width="40" height="40" />
-          <div className="flex flex-col items-start">
+          <div className="relative -top-1 flex flex-col items-start md:top-0">
             <p className="text-white font-semibold">Arcade</p>
             <p className="text-sm">{yearly ? "$90/yr" : "$9/mo"}</p>
             {yearly && (
@@ -60,10 +60,10 @@ const PlanForm = ({ updateForm, plan, yearly }: stepProps) => {
         </ToggleGroup.Item>
         <ToggleGroup.Item
           value="advanced"
-          className="border border-neutral-600 flex items-start gap-2 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
+          className="border border-neutral-600 flex items-start gap-3 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
         >
           <Image src={advancedImg} alt="advanced" width="40" height="40" />
-          <div className="flex flex-col items-start">
+          <div className="relative -top-1 flex flex-col items-start md:top-0">
             <p className="text-white font-semibold">Advanced</p>
             <p className="text-sm">{yearly ? "$120/yr" : "$12/mo"}</p>
             {yearly && (
@@ -73,11 +73,11 @@ const PlanForm = ({ updateForm, plan, yearly }: stepProps) => {
         </ToggleGroup.Item>
 
         <ToggleGroup.Item
-          className="border border-neutral-600 flex items-start gap-2 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
+          className="border border-neutral-600 flex items-start gap-3 p-3 h-24 rounded-md aspect-square data-[state=on]:border-[#77f6aa] data-[state=on]:bg-neutral-900 focus:border-[#77f6aa] outline-none hover:border-[#77f6aa] md:h-44 md:w-[30%] md:flex-col md:justify-between md:gap-0"
           value="pro"
         >
           <Image src={proImg} alt="pro" width="40" height="40" />
-          <div className="flex flex-col items-start">
+          <div className="relative -top-1 flex flex-col items-start md:top-0">
             <p className="text-white font-semibold">Pro</p>
             <p className="text-sm">{yearly ? "$150/yr" : "$15/mo"}</p>
             {yearly && (
