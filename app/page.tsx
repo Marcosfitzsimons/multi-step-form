@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useMultiplestepForm } from "hooks/useMultiplestepForm";
+import { AnimatePresence } from "framer-motion";
 import UserInfoForm from "@/components/UserInfoForm";
 import PlanForm from "@/components/PlanForm";
 import AddonsForm from "@/components/AddonsForm";
 import FinalStep from "@/components/FinalStep";
 import SuccessMessage from "@/components/SuccessMessage";
-import next from "next";
 import SideBar from "@/components/SideBar";
 
 interface AddOn {
@@ -119,7 +119,6 @@ export default function Home() {
 
     setFormData({ ...formData, ...fieldToUpdate });
   }
-  console.log(formData);
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -144,26 +143,33 @@ export default function Home() {
         className={`${showSuccessMsg ? "w-full" : "w-full md:mt-5 md:w-[65%]"}`}
       >
         {showSuccessMsg ? (
-          <SuccessMessage />
+          <AnimatePresence mode="wait">
+            <SuccessMessage />
+          </AnimatePresence>
         ) : (
           <form
             onSubmit={handleOnSubmit}
             className="w-full flex flex-col justify-between h-full"
           >
-            {currentStepIndex === 0 && (
-              <UserInfoForm
-                {...formData}
-                updateForm={updateForm}
-                errors={errors}
-              />
-            )}
-            {currentStepIndex === 1 && (
-              <PlanForm {...formData} updateForm={updateForm} />
-            )}
-            {currentStepIndex === 2 && (
-              <AddonsForm {...formData} updateForm={updateForm} />
-            )}
-            {currentStepIndex === 3 && <FinalStep {...formData} goTo={goTo} />}
+            <AnimatePresence mode="wait">
+              {currentStepIndex === 0 && (
+                <UserInfoForm
+                  key="step1"
+                  {...formData}
+                  updateForm={updateForm}
+                  errors={errors}
+                />
+              )}
+              {currentStepIndex === 1 && (
+                <PlanForm key="step2" {...formData} updateForm={updateForm} />
+              )}
+              {currentStepIndex === 2 && (
+                <AddonsForm key="step3" {...formData} updateForm={updateForm} />
+              )}
+              {currentStepIndex === 3 && (
+                <FinalStep key="step4" {...formData} goTo={goTo} />
+              )}
+            </AnimatePresence>
             <div className="w-full items-center flex justify-between">
               <div className="">
                 <Button

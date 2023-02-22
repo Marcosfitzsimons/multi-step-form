@@ -1,12 +1,33 @@
 import Image from "next/image";
-import successIcon from "../public/assets/success.png";
+import { motion } from "framer-motion";
 import { RefreshCcw } from "lucide-react";
 import { Button } from "../components/ui/button";
+import successIcon from "../public/assets/success.png";
+
+const successVariants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "backIn",
+      duration: 0.6,
+    },
+  },
+};
 
 const SuccessMessage = () => {
   const refresh = () => window.location.reload();
   return (
-    <section className="w-full h-full flex flex-col items-center justify-center gap-4 md:gap-2 text-center">
+    <motion.section
+      className="w-full h-full flex flex-col items-center justify-center gap-4 md:gap-2 text-center"
+      variants={successVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <Image
         src={successIcon}
         width="150"
@@ -32,7 +53,7 @@ const SuccessMessage = () => {
           </Button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
