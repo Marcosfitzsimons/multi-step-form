@@ -8,16 +8,9 @@ type stepProps = FormItems & {
 
 const AddonsForm = ({ addOns, yearly, updateForm }: stepProps) => {
   function handleCheckboxChange(addOnId: number, checked: boolean) {
-    const updatedAddOns = addOns.map((addOn) => {
-      if (addOn.id === addOnId) {
-        return {
-          ...addOn,
-          checked,
-        };
-      } else {
-        return addOn;
-      }
-    });
+    const updatedAddOns = addOns.map((addOn) =>
+      addOn.id === addOnId ? { ...addOn, checked } : addOn
+    );
     updateForm({ addOns: updatedAddOns });
   }
 
@@ -35,7 +28,7 @@ const AddonsForm = ({ addOns, yearly, updateForm }: stepProps) => {
             key={addOn.id}
           >
             <Checkbox
-              id="online-service"
+              id={`addon-${addOn.id}`}
               checked={addOn.checked}
               onCheckedChange={(checked) =>
                 handleCheckboxChange(addOn.id, checked as boolean)
@@ -44,7 +37,7 @@ const AddonsForm = ({ addOns, yearly, updateForm }: stepProps) => {
             <div className="w-full flex items-center justify-between">
               <div className="flex flex-col">
                 <label
-                  htmlFor="online-service"
+                  htmlFor={`addon-${addOn.id}`}
                   className="text-white font-semibold"
                 >
                   {addOn.title}
